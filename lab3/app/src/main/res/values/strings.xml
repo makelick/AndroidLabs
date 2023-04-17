@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Lab3</string>
+    <string name="ikea">IKEA</string>
+    <string name="cutipol">Cutipol</string>
+    <string name="iittala">Iittala</string>
+    <string name="ok">OK</string>
+    <string name="choose_brand">Choose a brand</string>
+
+    <string name="result">%1$s \nBrands: %2$s</string>
+    <string name="back">Back</string>
+
+    <string-array name="utensils">
+        <item>Glass</item>
+        <item>Colander</item>
+        <item>Fork</item>
+        <item>Glass</item>
+        <item>Knife</item>
+        <item>Pan</item>
+        <item>Spoon</item>
+    </string-array>
+</resources>
