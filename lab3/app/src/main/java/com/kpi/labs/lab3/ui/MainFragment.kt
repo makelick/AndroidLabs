@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -22,32 +24,67 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            viewModel = sharedViewModel
-            lifecycleOwner = viewLifecycleOwner
-            mainFragment = this@MainFragment
+        val checkboxes = listOf(
+            binding.ikeaCheckbox,
+            binding.cutipolCheckbox,
+            binding.iittalaCheckbox
+        )
+
+        checkboxes.forEach {
+            it.setOnCheckedChangeListener { checkbox, isChecked ->
+                changeBrandStatus(checkbox, isChecked)
+            }
+        }
+
+        binding.utensilsSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    sharedViewModel.setUtensil("")
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    sharedViewModel.setUtensil(parent?.getItemAtPosition(position).toString())
+                }
+            }
+
+        binding.okButton.setOnClickListener {
+            navigateToResult()
+        }
+
+    }
+
+    private fun changeBrandStatus(compoundButton: CompoundButton, isChecked: Boolean) {
+        val brand = compoundButton.text.toString()
+        if (isChecked) {
+            sharedViewModel.addBrand(brand)
+        } else {
+            sharedViewModel.removeBrand(brand)
         }
     }
 
-    fun navigateToResult() {
+    private fun navigateToResult() {
         if (sharedViewModel.isBrandsEmpty()) {
             Snackbar.make(
                 binding.root,
                 R.string.choose_brand,
                 Snackbar.LENGTH_SHORT
             ).show()
-            return
+        } else {
+            sharedViewModel.createResult()
+            findNavController().navigate(R.id.action_mainFragment_to_resultFragment)
         }
-
-        sharedViewModel.setUtensil(binding.utensilsSpinner.selectedItem.toString())
-        sharedViewModel.createResult()
-        findNavController().navigate(R.id.action_mainFragment_to_resultFragment)
     }
 
 }

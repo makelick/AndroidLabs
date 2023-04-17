@@ -21,21 +21,22 @@ class ResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentResultBinding.inflate(inflater, container, false)
+
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = sharedViewModel
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            viewModel = sharedViewModel
-            resultFragment = this@ResultFragment
-            lifecycleOwner = viewLifecycleOwner
+        binding.backButton.setOnClickListener {
+            findNavController().navigateUp()
         }
-    }
 
-    fun navigateToMain() {
-        findNavController().navigateUp()
     }
 
 }
