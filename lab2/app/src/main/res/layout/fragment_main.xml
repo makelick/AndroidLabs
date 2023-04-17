@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.kpi.labs.lab2.ui.main.SharedViewModel" />
+
+        <variable
+            name="mainFragment"
+            type="com.kpi.labs.lab2.ui.main.MainFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/utensils_spinner"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:entries="@array/utensils"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/ikea_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:onCheckedChanged="@{ viewModel::changeBrandStatus }"
+            android:text="@string/ikea"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/utensils_spinner" />
+
+        <CheckBox
+            android:id="@+id/cutipol_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/margin_between_checkboxes"
+            android:onCheckedChanged="@{ viewModel::changeBrandStatus }"
+            android:text="@string/cutipol"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ikea_checkbox" />
+
+        <CheckBox
+            android:id="@+id/iittala_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginTop="@dimen/margin_between_checkboxes"
+            android:onCheckedChanged="@{ viewModel::changeBrandStatus }"
+            android:text="@string/iittala"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cutipol_checkbox" />
+
+
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:onClick="@{ () -> mainFragment.navigateToResult()}"
+            android:text="@string/ok"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iittala_checkbox" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
