@@ -82,7 +82,7 @@ class MainFragment : Fragment() {
                 Snackbar.LENGTH_SHORT
             ).show()
         } else {
-            sharedViewModel.createResult()
+            sharedViewModel.saveResult()
             findNavController().navigate(R.id.action_mainFragment_to_resultFragment)
         }
     }
