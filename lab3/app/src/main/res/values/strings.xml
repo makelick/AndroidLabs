@@ -13,6 +13,7 @@
     <string name="brands">Brands</string>
     <string name="item">Item</string>
     <string name="history">History</string>
+    <string name="database_is_empty">Database is empty</string>
 
     <string-array name="utensils">
         <item>Glass</item>

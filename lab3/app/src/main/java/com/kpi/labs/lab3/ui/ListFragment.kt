@@ -35,6 +35,11 @@ class ListFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this.context)
 
         sharedViewModel.history.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                binding.isEmptyText.visibility = View.VISIBLE
+            } else {
+                binding.isEmptyText.visibility = View.GONE
+            }
             adapter.submitList(it)
         }
 
