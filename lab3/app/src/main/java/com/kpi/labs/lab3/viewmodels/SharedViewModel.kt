@@ -38,7 +38,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     fun addBrand(brand: String) {
         if (selectedBrands.value?.contains(brand) == false) {
-            selectedBrands.value = selectedBrands.value.orEmpty() + brand
+            selectedBrands.value = (selectedBrands.value.orEmpty() + brand).sorted()
         }
     }
 
