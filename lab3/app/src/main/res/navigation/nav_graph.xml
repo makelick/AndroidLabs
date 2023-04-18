@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_mainFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.kpi.labs.lab3.ui.ResultFragment"
         android:label="Result">
     </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.kpi.labs.lab3.ui.ListFragment"
+        android:label="ListFragment" />
 </navigation>

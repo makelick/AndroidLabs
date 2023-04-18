@@ -5,9 +5,14 @@
     <string name="iittala">Iittala</string>
     <string name="ok">OK</string>
     <string name="choose_brand">Choose a brand</string>
+    <string name="result_saved">Result saved to database</string>
+    <string name="result_not_saved">Error when saving the result</string>
 
     <string name="result">%1$s \nBrands: %2$s</string>
     <string name="back">Back</string>
+    <string name="brands">Brands</string>
+    <string name="item">Item</string>
+    <string name="history">History</string>
 
     <string-array name="utensils">
         <item>Glass</item>

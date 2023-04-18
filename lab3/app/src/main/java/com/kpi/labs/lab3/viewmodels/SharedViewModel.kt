@@ -1,10 +1,7 @@
 package com.kpi.labs.lab3.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.kpi.labs.lab3.Lab3Application
 import com.kpi.labs.lab3.R
 import com.kpi.labs.lab3.database.Result
@@ -14,10 +11,10 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
     private val database = (application as Lab3Application).database
 
+
+    val history : LiveData<List<Result>> = database.getDao().getAll().asLiveData()
     private var selectedBrands = MutableLiveData<List<String>>()
-
     private var utensil = MutableLiveData<String>()
-
     private var _stringResult = MutableLiveData<String>()
     val stringResult: LiveData<String> = _stringResult
 

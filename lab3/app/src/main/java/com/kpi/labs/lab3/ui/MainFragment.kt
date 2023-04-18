@@ -63,6 +63,10 @@ class MainFragment : Fragment() {
             navigateToResult()
         }
 
+        binding.historyButton.setOnClickListener {
+            navigateToList()
+        }
+
     }
 
     private fun changeBrandStatus(compoundButton: CompoundButton, isChecked: Boolean) {
@@ -76,15 +80,30 @@ class MainFragment : Fragment() {
 
     private fun navigateToResult() {
         if (sharedViewModel.isBrandsEmpty()) {
-            Snackbar.make(
-                binding.root,
-                R.string.choose_brand,
-                Snackbar.LENGTH_SHORT
-            ).show()
-        } else {
-            sharedViewModel.saveResult()
-            findNavController().navigate(R.id.action_mainFragment_to_resultFragment)
+            showSnackbar(R.string.choose_brand)
+            return
         }
+
+        try {
+            sharedViewModel.saveResult()
+        } catch (e: Exception) {
+            showSnackbar(R.string.result_not_saved)
+        }
+
+        showSnackbar(R.string.result_saved)
+        findNavController().navigate(R.id.action_mainFragment_to_resultFragment)
+    }
+
+    private fun navigateToList() {
+        findNavController().navigate(R.id.action_mainFragment_to_listFragment)
+    }
+
+    private fun showSnackbar(message: Int) {
+        Snackbar.make(
+            binding.root,
+            getString(message),
+            Snackbar.LENGTH_SHORT
+        ).show()
     }
 
 }
